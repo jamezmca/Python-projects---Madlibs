@@ -6,7 +6,7 @@ class TicTacToe:
 
     def print_board(self):
         # this is just getting the rows
-        for row in [self.board[i*3:(i+1)*3 for i in range(3)]]:
+        for row in [self.board[i*3:(i+1)*3] for i in range(3)]:
             print('| ' + ' | '.join(row) + ' |')
         
         @staticmethod
@@ -18,7 +18,7 @@ class TicTacToe:
 
 
         def available_moves(self):
-            return [i for i, spot in enumarate(self.board) if spot == ' ']
+            return [i for i, spot in enumerate(self.board) if spot == ' ']
             # moves = []
             # for (i, spot) in enumerate(self.board):
             #     #numbers each spot
