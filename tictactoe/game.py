@@ -1,3 +1,4 @@
+import time
 from player import HumanPlayer, RandomComputerPlayer
 
 class TicTacToe:
@@ -35,10 +36,10 @@ class TicTacToe:
         return self.board.count(' ')
 
     def make_move(self, square, letter):
-        # if valid mvoe, then make the move (assign square to letter)
+        # if valid move, then make the move (assign square to letter)
         # then return true. if invalid then return false
         if self.board[square] == ' ':
-            self.board[square] == letter
+            self.board[square] = letter
             if self.winner(square, letter):
                 self.current_winner = letter
             return True
@@ -66,7 +67,8 @@ class TicTacToe:
             diagonal2 = [self.board[i] for i in [2, 4, 6]] # right to left diagonal
             if all([spot == letter for spot in diagonal2]):
                 return True
-        
+                
+        # if all of these fail
         return False
 
 
@@ -93,13 +95,15 @@ def play(game, x_player, o_player, print_game=True):
                 game.print_board()
                 print('') # just an empty line
 
-                if game.current_winner:
-                    if print_game:
-                        print(letter + ' wins!')
-                    return letter
+            if game.current_winner:
+                if print_game:
+                    print(letter + ' wins!')
+                return letter
 
             # after we made our move, we need to alternate letters
             letter = 'O' if letter == 'X' else 'X'
+
+        time.sleep(0.8) # tiny break to make it a lil easier
 
     if print_game:
         print('It\'s a tie')
