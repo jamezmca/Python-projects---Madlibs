@@ -17,3 +17,6 @@ better not lose but it's a basic sequence of conditional statements until someon
 
 ## tic tac toe - we gonna play the computer
 Basic visual and gameplay against the computer
+
+## binary search
+compares a binary search runtime for 10000 calculations to a naive search of equivalent length
