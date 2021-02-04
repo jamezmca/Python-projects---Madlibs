@@ -20,3 +20,10 @@ Basic visual and gameplay against the computer
 
 ## binary search
 compares a binary search runtime for 10000 calculations to a naive search of equivalent length
+
+## minesweeper
+dont get blown up my homie
+
+
+## sudoku solver
+we gone cheat the game my homie
