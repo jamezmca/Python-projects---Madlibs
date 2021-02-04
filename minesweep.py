@@ -1,4 +1,5 @@
 import random
+import re
 # lets create a board object to represent the minesweeper game
 # this is so that we can just say "create a new board object", or 
 # "dig here", or "render this game for this object"
@@ -38,6 +39,8 @@ class Board:
                 
             board[row][col] = '*' # plant the bomb
             bombs_planted += 1
+        
+        return board
     
     def assign_values_to_board(self):
         # now that we have the bombs planted, let's assign a number 0-8 for all 
@@ -133,11 +136,11 @@ class Board:
             format = '%-' + str(widths[idx]) + "s"
             cells.append(format % (col))
         indices_row += '   '.join(cells)
-        incices_row += '   \n'
+        indices_row += '   \n'
 
         for i in range(len(visible_board)):
             row = visible_board[i]
-            str_rep += f'{i} |'
+            string_rep += f'{i} |'
             cells = []
             for idx, col in enumerate(row):
                 format = '%-' + str(widths[idx]) + "s"
@@ -145,10 +148,10 @@ class Board:
             string_rep += '   '.join(cells)
             string_rep += '   \n'
 
-        str_len = int(len(str_rep) / self.dim_size)
+        str_len = int(len(string_rep) / self.dim_size)
         string_rep = indices_row + '-'*str_len + '\n' + string_rep + '-'*str_len
 
-        return str_rep
+        return string_rep
 
 
 # play the game
@@ -162,4 +165,30 @@ def play(dim_size = 10, num_bombs = 10):
     # step 3b: if location is not a bomb, dig recursively 
     # until each square is atleast next to a bomb
     # step 4: repeat steps 2 and 3a/b until no more places to dig --> victory
-    pass
+    safe = True
+
+    while len(board.dug) < board.dim_size ** 2 - num_bombs:
+        print(board)
+        user_input = re.split(',(\\s)*' ,input("where would you like to dig? Input as row, col: ")) # '0, 3'
+        row, col = int(user_input[0]), int(user_input[-1])
+        if row < 0 or row >= board.dim_size or col < 0 or col >= board.dim_size:
+            print('Invalid Location. try again')
+            continue
+
+        # if it's valid, we dig
+        safe = board.dig(row, col)
+        if not safe:
+            # dug a bomb
+            break # (ggwp)
+
+    # 2 ways to end loop, lets check which one
+    if safe: 
+        print('congrats u winner')
+    else:
+        print('rip ggwp')
+        board.dug = [(r,c) for r in range(board.dim_size) for c in range(board.dim_size)]
+        print(board)
+
+
+if __name__ == '__main__': #good practice
+    play()  
