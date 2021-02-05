@@ -27,3 +27,6 @@ dont get blown up my homie
 
 ## sudoku solver
 we gone cheat the game my homie
+
+## photo processing
+editting images in python
