@@ -75,3 +75,9 @@ def solve_sudoku(puzzle):
 
     #step 6: if non the numbers that we try work, the this puzzle be whack
     return False
+
+
+if __name__ == '__main__':
+    example_board = [[]]
+    print(solve_sudoku(example_board))
+    print(example_board)
