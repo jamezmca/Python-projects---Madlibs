@@ -16,8 +16,8 @@ import png
 class Image:
     def __init__(self, x_pixels=0, y_pixels=0, num_channels=0, filename=''):
         # you need to input either filename OR x_pixels, y_pixels, and num_channels
-        self.input_path = 'input/'
-        self.output_path = 'output/'
+        self.input_path = 'pyphotoshop/input/'
+        self.output_path = 'pyphotoshop/output/'
         if x_pixels and y_pixels and num_channels:
             self.x_pixels = x_pixels
             self.y_pixels = y_pixels
