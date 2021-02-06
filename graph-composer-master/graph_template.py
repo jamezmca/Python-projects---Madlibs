@@ -1,55 +1,56 @@
-
-"""
-Empty Graph Template to implement :D
-
-YouTube Kylie Ying: https://www.youtube.com/ycubed 
-Twitch KylieYing: https://www.twitch.tv/kylieying 
-Twitter @kylieyying: https://twitter.com/kylieyying 
-Instagram @kylieyying: https://www.instagram.com/kylieyying/ 
-Website: https://www.kylieying.com
-Github: https://www.github.com/kying18 
-Programmer Beast Mode Spotify playlist: https://open.spotify.com/playlist/4Akns5EUb3gzmlXIdsJkPs?si=qGc4ubKRRYmPHAJAIrCxVQ 
-"""
-
+# this is our markov chain representation
 import random
 
-class Vertex(object):
-    def __init__(self, value):
-        pass
+# define the graph in terms of vertices
 
-    def add_edge_to(self, vertex, weight=0):
-        pass
+class Vertex:
+    def __init__(self, value): # value will be the word
+        self.value = value
+        self.adjacent = {} # nodes that have an edge from this vertex
+        self.neighbors = []
+        self.neighbor_weights = []
 
+    def add_edge_to(self, vertex, weight = 0):
+        # this is adding an edge to the vertex we input with weight
+        self.adjacent[vertex] = weight
+        
     def increment_edge(self, vertex):
-        pass
+        # this is incrementing the weight of the edge
+        self.adjacent[vertex] = self.adjacent.get(vertex, 0) + 1
 
-    def get_adjacent_nodes(self):
-        pass
-
-    # initializes probability map
     def get_probability_map(self):
-        pass
+        for (vertex, weight) in self.adjacent.items():
+            self.neighbors.append(vertex)
+            self.neighbor_weights.append(weight)
+
 
     def next_word(self):
-        pass
+        # randomly select next word ***based on weights!!!
+        return random.choices(self.neighbors, weights = self.neighbor_weights)[0]
 
-
-
-class Graph(object):
+# now that we have our vertex representation, we put this together in a graph
+class Graph:
     def __init__(self):
-        pass
+        self.vertices = {}
 
     def get_vertex_values(self):
-        pass
+        # what are the values of all the vertices?
+        # return all possible words
+        return set(self.vertices.keys())
 
     def add_vertex(self, value):
-        pass
+        self.vertices[value] = Vertex(value)
 
     def get_vertex(self, value):
-        pass
+        # what if the value isn't in the graph
+        if value not in self.vertices:
+            self.add_vertex(value)
+        return self.vertices[value] # get the vertex object
 
     def get_next_word(self, current_vertex):
-        pass
+        return self.vertices[current_vertex.value].next_word()
 
     def generate_probability_mappings(self):
-        pass
+        for vertex in self.vertices.values():
+            vertex.get_probability_map()
+

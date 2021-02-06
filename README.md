@@ -29,4 +29,7 @@ dont get blown up my homie
 we gone cheat the game my homie
 
 ## photo processing
-editting images in python
+editting images in python (has small error in that I can't use my own images but i'll suss that out eventually)
+
+## markov chain composer
+composed markov chains from word files to generate not so random text statements
